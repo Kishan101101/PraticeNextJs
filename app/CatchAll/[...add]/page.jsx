@@ -1,11 +1,14 @@
 // app/CatchAll/[...add]/page.jsx
-//it is treated as a asynchhronous task in Next.js 15
+
+import AdminPage from "./AdminPage";
+import UserPage from "./UserPage";
+
+//it is treated as a asynchhronous task in Next.js
 export default async function Page({ params }) {
   const { add } = await params; // 👈 required in Next.js 15
+  if (add?.[0] === "admin") {
+    return <AdminPage />;
+  }
 
-  return (
-    <div>
-      <h1>Catch All Route: {add?.join("/")}</h1>
-    </div>
-  );
+  return <UserPage />;
 }
